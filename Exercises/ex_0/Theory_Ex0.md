@@ -13,17 +13,48 @@
 
 [AWS Cloud Migration](https://aws.amazon.com/migration-and-modernization/)
 
-
 ####   b) What are different layers in medallion architecture in Databricks?
 
-- Bronze (rådata): Data kopieras in exakt som den är från källan
-- Silver (rensat): Data städas, valideras och struktureras
-- Gold (aggregerat): Färdig business-data för rapporter och analytics
+**Bronze Layer (Raw/Landing)**
+- Rådata kopieras in exakt som den är från källan
+- Minimal eller ingen transformation
+- Bevarar originaldata och historik
+
+**Silver Layer (Cleaned/Validated)**
+- Data städas, valideras och struktureras
+- Duplicat tas bort
+- Standardiserade format och typer
+
+**Gold Layer (Curated/Aggregated)**
+- Business-level aggregeringar
+- Optimerad för analytiska frågor
+- Dimensionella modeller (star/snowflake schemas)
+
+**Serving Layer (Consumption)**
+- Bryggan mellan data och användare
+
+**Serving-lagret gör data:**
+- Tillgänglig (rätt format för rätt verktyg)
+- Användbar (optimerad för queries)
+- Actionable (integrerad i beslutssystem)
+
+Data exponeras genom:
+- BI-verktyg (Power BI, Tableau)
+- SQL endpoints
+- APIs och applikationer
+- ML-modeller i produktion
+- Real-time dashboards
+
+
 
 ![Medallion Architecture](https://docs.databricks.com/aws/en/assets/images/medallion-architecture-15e2d57ad70d28b1701dda4f7271d862.png)
 
 #### Källor:
 [Databricks officiella dokumentation](https://docs.databricks.com/en/lakehouse/medallion.html)
+
+[Databricks Serving Layer Best Practices](https://www.databricks.com/blog/2022/05/20/five-simple-steps-for-implementing-a-star-schema-in-databricks-with-delta-lake.html)
+
+[Data Lakehouse Architecture](https://www.databricks.com/glossary/data-lakehouse)
 
 ####   c) Are big data and cloud the same concept? Explain your thoughts in details.
 
@@ -78,5 +109,13 @@
 [PySpark vs SQL comparison](https://docs.databricks.com/en/languages/index.html)
 
 
+#### Ytterliggare källor 
+[Databricks Academy](https://www.databricks.com/learn/training/home)
+
+[Microsoft Learn - Databricks](https://learn.microsoft.com/en-us/azure/databricks/)
+
+[Apache Spark Documentation](https://spark.apache.org/docs/latest/)
+
+[Databricks Certified Associate Developer Exam Guide](https://www.databricks.com/learn/certification)
 
 
