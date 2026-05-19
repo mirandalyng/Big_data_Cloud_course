@@ -1,5 +1,7 @@
 # Medalltion Bronze Layer with Spark Decleration Pipelines 
 
+(Ex 00 - task )
+
 ## How to step-by-step 
 
 **create a folder structure (e.g. Bronze_layer --> explorations, transformations, utils)**
@@ -80,17 +82,19 @@ Show schemas:
     `
 
 ##5. PySpark Streaming Table
-**1. create and file inside the bronze folder (e.g. raw_supply_chain.py)**
-**2. Write the script**
+**1. Create foldes (bronze-silver-gold inside of the transformation)
+**2. create and file inside the bronze folder (e.g. raw_supply_chain.py)**
+**3. Write the script**
 
     # Spark declarity pipeline to get the data into our bronze layer
 
 from pyspark import pipelines as dp
 
-# Base dir with the data folders
+**4. Base dir with the data folders**
 BASE_DIR = "/Volumes/supply_chain_demo/default/raw"
 
-# Provide a schema to the data
+**5. Provide a schema to the data**
+
     `
     schema = (
         spark.read.format("csv")
@@ -113,7 +117,25 @@ BASE_DIR = "/Volumes/supply_chain_demo/default/raw"
             spark.readStream.format("csv").options(header=True, encoding="UTF-8").schema(schema).load(f"{BASE_DIR}/data")
         )
     `
+**6. Run the pipeline**
 
+**7. Go to the Catalog --> bronze --> see the new raw supply chain --> sample data --> connect**
+
+
+
+## 6. SQL Streaming Tables
+
+**1.Create another file in the bronze layer folder for the sequal (SQL) --> supply_chain_logs.sql**
+
+**2. Ingest the log files**
+
+    `
+    CREATE OR REFRESH STREAMING TABLE airbnb.bronze.raw_access_logs
+    COMMENT "Raw access logs" AS 
+    SELECT 
+    * FROM 
+    STREAM read_files("/Volumes/airnb/default/raw/logs", format => "csv", header => true, inferSchema => true )
+    `
 
 
 
