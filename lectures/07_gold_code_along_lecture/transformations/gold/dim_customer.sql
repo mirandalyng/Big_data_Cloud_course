@@ -1,26 +1,21 @@
 CREATE OR REFRESH MATERIALIZED VIEW supply_chain_live.gold.dim_customer
   COMMENT "Dim customer dedubplicated - gold layer" AS
 SELECT
-  product_card_id AS product_id,
-  MAX_BY(product_name, order_date) AS product_name,
-  ROUND(MAX_BY(product_price, order_date), 2) AS product_price
-
+  customer_id, 
+  MAX_BY(customer_fname, order_date) AS first_name, 
+  MAX_BY(customer_lname, order_date) AS last_name,
+  MAX_BY(customer_country, order_date) AS country,
+  MAX_BY(customer_street, order_date) AS street,
+  MAX_BY(customer_city, order_date) AS city,
+  MAX_BY(customer_state, order_date) AS state,
+  MAX_BY(customer_zipcode, order_date) AS zipcode, 
+  MAX_BY(customer_segment, order_date) AS segment
 
 FROM
   supply_chain_live.silver.supply_chain_obt
 
 
-GROUP BY
-  product_id
+GROUP BY  
+  customer_id 
 ORDER BY
-  product_id;
-
-  -- customer_id integer [primary key]
-  -- first_name string
-  -- last_name string 
-  -- country string
-  -- state string 
-  -- city string 
-  -- street string 
-  -- zipcode integer
-  -- segment string 
+  customer_id; 
