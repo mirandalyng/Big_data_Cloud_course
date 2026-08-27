@@ -1,0 +1,10 @@
+services:
+  backend:
+    container_name: backend
+    build:
+      #context - exactly this file (in this case the root map)
+      context: .
+      dockerfile: dockerfiles/backend.dockerfile
+    #host to container
+    ports:
+      - "8000:8000"
